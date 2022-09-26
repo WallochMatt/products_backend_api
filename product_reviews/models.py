@@ -1,5 +1,6 @@
 from tkinter import CASCADE
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 from products.models import Product
 
@@ -8,6 +9,8 @@ from products.models import Product
 
 class Review(models.Model):
     review_text = models.CharField(max_length=255)
-    rating = models.IntegerField()
+    rating = models.IntegerField(
+        validators=[MaxValueValidator(5), MinValueValidator(1)]
+    )
     name = models.CharField(max_length=255)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
