@@ -9,8 +9,8 @@ from .models import Review
 @api_view(['GET', 'POST'])
 def reviews_list(request):
     if request.method == 'GET':
-        products = Review.objects.all()
-        serializer = ReviewSerializer(products, many=True)
+        reviews = Review.objects.all()
+        serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'POST':
@@ -21,13 +21,22 @@ def reviews_list(request):
 
 @api_view(['PUT', 'DELETE'])
 def reviews_detail(request, pk):
-    product = get_object_or_404(Review, pk=pk)
+    review = get_object_or_404(Review, pk=pk)
     if request.method == "PUT":
-        serializer = ReviewSerializer(product, data=request.data)
+        serializer = ReviewSerializer(review, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'DELETE':
-        product.delete()
+        review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+def reviews_by_product(request, fk):
+    if request.method == 'GET':
+        reviews = Review.objects.filter(product_id=fk)
+        serializer = ReviewSerializer(reviews, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
