@@ -1,7 +1,150 @@
+
 # products_backend_api
+
+## Overview of API
+
+This ![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray) API utilizes calls to a ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white) database. It was the first project for an API after learning how to create them. The API has full CRUD functionality of products and reviews on those products(which was a bonus objective for this project).
+
+
+## Get All Products
+
+This endpoint returns a Response that has all the products objects.
+
+	GET /
+
+		--request GET
+		--url http://127.0.0.1:8000/api/products/
+
+
+## Get Product by ID
+
+This endpoint returns a Response that is one product object. This will be 
+
+
+| Parameter | Datatype | Description |
+|	------------| -----------------| -------------|
+|	id 		| 	int		|	The object which has the primary key of the entered ID |
+
+	GET /{id}
+		--request GET
+		--url http://127.0.0.1:8000/api/products/id/
+
+
+
+## Post Product
+
+This endpoint returns a Response 201 created on a successful POST
+
+	POST /
+		--request POST
+		--url http://127.0.0.1:8000/api/products/
+	
+	Body
+		title string
+		The name of the product, for example: 'HDMI Cord'
+
+
+		description string
+		A brief description of the product, for example: "HDMI tot HDMI cable"
+
+		price float
+		The USD cost of the product, for example: 17.95
+
+		inventory_quantity int
+		The amount of the product in stock, for example: 10
+
+	JSON
+
+		{
+			"title": "HDMI Cord",
+			"description": "HDMI to HDMI cable",
+			"price": 17.99,
+			"inventory_quantity": 10
+		}
+
+
+## Update Product
+
+This endpoint changes a specific objects attribute fields.
+
+| Parameter | Datatype | Description |
+|	------------| -----------------| -------------|
+|	id 		| 	int		|	The object which has the primary key of the entered ID |
+	
+	PUT /{id}
+		--request PUT
+		--url http://127.0.0.1:8000/api/products/id/
+		
+
+	Body
+		title string
+		The name of the product, for example: 'HDMI Cord'
+
+
+		description string
+		A brief description of the product, for example: "HDMI tot HDMI cable"
+
+		price float
+		The USD cost of the product, for example: 17.95
+
+		inventory_quantity int
+		The amount of the product in stock, for example: 10
+
+	JSON
+		{
+			"title": "HDMI Cord",
+			"description": "8ft HDMI to HDMI cable",
+			"price": 20.00,
+			"inventory_quantity": 6
+		}
+
+## Delete Product
+
+This endpoint removes an object from the database and responds with a 204 NO CONTENT code
+
+
+| Parameter | Datatype | Description |
+|	------------| -----------------| -------------|
+|	id 		| 	int		|	The object which has the primary key of the entered ID |
+	
+	DELETE /{id}
+		--request DELETE
+		--url http://127.0.0.1:8000/api/products/id/
+
+
+## Installation Steps
+
+- Create a new mySQL connection
+- Run: CREATE DATABASE
+- Download the zip file from GitHUb
+- Open the unzipped folder in your IDE of choice, I use VSCode
+- Run: pipenv install
+- Run: pipenv shell
+- Select the virutal envionmnet in the Python: Select Interpreter
+- Create a local settings file
+- Add a SECRET_KEY and DATABASES section
+- Fill out the information for the database connection like name and password
+- Assuming your database is set up, you should now be able to migrate
+- I used and recommend Postman for the API calls
+
+
+
+## Contact Me
+
+See more of my repositories [here!](https://github.com/WallochMatt?tab=repositories)
+
+Message me on [LinkedIn!](https://www.linkedin.com/in/matthew-walloch-931409250/)
+
+Or shoot me an email!: matthewrwalloch@gmail.com
+
+
+
+## User Stories
+
+For those interested, below is the user stories for this project
+
 A 'Products API backend', executable through Postman
 
-Stories:
 As a developer, I want to make good, consistent commits.
 
 As a developer, I want to create an Entity Relationship Diagram that will accurately show the necessary properties on the Product model
